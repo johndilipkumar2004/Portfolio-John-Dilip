@@ -1,0 +1,243 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* Cyberpunk Portfolio Design System */
+@layer base {
+  :root {
+    /* Dark theme colors */
+    --background: 220 25% 5%;
+    --foreground: 210 40% 98%;
+    
+    --card: 220 25% 8%;
+    --card-foreground: 210 40% 98%;
+    
+    --primary: 190 95% 50%;
+    --primary-foreground: 220 25% 5%;
+    
+    --secondary: 260 95% 70%;
+    --secondary-foreground: 220 25% 5%;
+    
+    --accent: 190 95% 50%;
+    --accent-foreground: 220 25% 5%;
+    
+    --muted: 220 25% 12%;
+    --muted-foreground: 210 20% 65%;
+    
+    --border: 220 25% 15%;
+    --input: 220 25% 12%;
+    --ring: 190 95% 50%;
+    
+    /* Gradient colors */
+    --gradient-primary: linear-gradient(135deg, hsl(190, 95%, 50%), hsl(260, 95%, 70%));
+    --gradient-secondary: linear-gradient(135deg, hsl(220, 25%, 8%), hsl(220, 25%, 12%));
+    --gradient-text: linear-gradient(135deg, hsl(190, 95%, 50%), hsl(260, 95%, 70%));
+    
+    /* Animation colors */
+    --glow-cyan: 0 0 20px hsl(190, 95%, 50%);
+    --glow-purple: 0 0 20px hsl(260, 95%, 70%);
+    
+    /* Grid pattern */
+    --grid-color: hsl(190, 95%, 50%);
+    --grid-opacity: 0.1;
+    
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-inter;
+    background-image: 
+      linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-attachment: fixed;
+  }
+  
+  .gradient-text {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .glow-cyan {
+    box-shadow: var(--glow-cyan);
+  }
+  
+  .glow-purple {
+    box-shadow: var(--glow-purple);
+  }
+  
+  .grid-pattern {
+    background-image: 
+      linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  
+  .hero-grid {
+    background-image: 
+      linear-gradient(rgba(0, 255, 255, 0.2) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 255, 0.2) 1px, transparent 1px);
+    background-size: 100px 100px;
+    animation: gridFloat 20s ease-in-out infinite;
+  }
+  
+  .floating-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  
+  .particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: hsl(190, 95%, 50%);
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .skill-bar {
+    background: linear-gradient(90deg, hsl(190, 95%, 50%), hsl(260, 95%, 70%));
+    border-radius: 4px;
+    height: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .skill-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 rounded-lg font-semibold transition-all duration-300;
+    box-shadow: 0 0 20px hsl(190, 95%, 50%, 0.3);
+  }
+  
+  .btn-primary:hover {
+    box-shadow: 0 0 30px hsl(190, 95%, 50%, 0.5);
+    transform: translateY(-2px);
+  }
+  
+  .btn-secondary {
+    @apply border border-primary text-primary hover:bg-primary hover:text-primary-foreground px-8 py-3 rounded-lg font-semibold transition-all duration-300;
+  }
+  
+  .btn-secondary:hover {
+    box-shadow: 0 0 20px hsl(190, 95%, 50%, 0.3);
+  }
+  
+  .nav-link {
+    @apply text-foreground hover:text-primary transition-colors duration-300 relative;
+  }
+  
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    transition: width 0.3s ease;
+  }
+  
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+  
+  .section-title {
+    @apply text-4xl md:text-5xl font-bold mb-6;
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .card-cyber {
+    @apply bg-card border border-border rounded-xl p-6 transition-all duration-300;
+    background: linear-gradient(135deg, hsl(220, 25%, 8%), hsl(220, 25%, 12%));
+  }
+  
+  .card-cyber:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px hsl(190, 95%, 50%, 0.2);
+  }
+}
+
+@keyframes gridFloat {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  25% { transform: translateY(-10px) translateX(5px); }
+  50% { transform: translateY(0) translateX(10px); }
+  75% { transform: translateY(10px) translateX(5px); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  50% { transform: translateY(-100vh) rotate(180deg); }
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px hsl(190, 95%, 50%, 0.3); }
+  50% { box-shadow: 0 0 40px hsl(190, 95%, 50%, 0.6); }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
